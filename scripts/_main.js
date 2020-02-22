@@ -1,3 +1,3 @@
 'use strict';
 
-ReactDOM.render(<Chart />, document.querySelector('#container-chart'));
+ReactDOM.render(<Simulation />, document.querySelector('#container-chart'));

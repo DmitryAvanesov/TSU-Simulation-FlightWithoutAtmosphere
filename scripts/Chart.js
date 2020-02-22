@@ -5,8 +5,8 @@ class Chart extends React.Component {
     super(props);
 
     this.model = new ChartModel();
-    this.chartWidth = 800;
-    this.chartHeight = 500;
+    this.chartWidth = 900;
+    this.chartHeight = 600;
   }
 
   render() {
@@ -18,13 +18,16 @@ class Chart extends React.Component {
       >
         <window.Recharts.Tooltip />
         <window.Recharts.XAxis
-          dataKey='x' />
+          dataKey='x'
+        />
         <window.Recharts.YAxis
-          dataKey='y' />
+          dataKey='y'
+        />
         <window.Recharts.Line
           type='monotone'
           dataKey='y'
-          stroke='black' />
+          stroke='black'
+        />
       </window.Recharts.LineChart>
     );
   }

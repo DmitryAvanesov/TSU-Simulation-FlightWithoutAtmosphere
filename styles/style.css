@@ -1,1 +1,28 @@
-/* No CSS *//*# sourceMappingURL=style.css.map */
+.recharts-wrapper {
+  display: inline-block;
+}
+
+.parameters {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 50px;
+}
+
+.parameters .parameters-block {
+  margin: 10px 0;
+}
+
+.parameters .parameters-block * {
+  display: inline-block;
+}
+
+.parameters .parameters-block .parameters-name {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.parameters .parameters-block input {
+  width: 100px;
+  margin-left: 10px;
+}
+/*# sourceMappingURL=style.css.map */

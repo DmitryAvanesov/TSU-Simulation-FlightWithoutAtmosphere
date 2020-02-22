@@ -6,8 +6,14 @@ class ChartModel {
         this.time = 0;
         this.timeIncreasingInterval = 1000;
 
-        this.timeIncreasing = setInterval(() => {
-            
-        }, this.timeIncreasingInterval);
+        this.speed;
+        this.height;
+        this.angle;
+    }
+
+    increaseTime() {
+        this.time++;
+
+
     }
 }
