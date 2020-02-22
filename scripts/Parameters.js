@@ -14,7 +14,7 @@ class Parameters extends React.Component {
             type='number'
             id='input-speed'
             defaultValue={this.props.initialSpeed}
-            onChange={this.props.callback}
+            onChange={this.props.callbackChange}
           >
           </input>
         </div>
@@ -25,7 +25,7 @@ class Parameters extends React.Component {
             type='number'
             id='input-height'
             defaultValue={this.props.initialHeight}
-            onChange={this.props.callback}
+            onChange={this.props.callbackChange}
           >
           </input>
         </div>
@@ -36,7 +36,7 @@ class Parameters extends React.Component {
             type='number'
             id='input-angle'
             defaultValue={this.props.initialAngle}
-            onChange={this.props.callback}
+            onChange={this.props.callbackChange}
           >
           </input>
         </div>

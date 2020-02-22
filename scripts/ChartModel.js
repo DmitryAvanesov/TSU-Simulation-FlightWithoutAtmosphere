@@ -2,10 +2,7 @@
 
 class ChartModel {
   constructor() {
-    this.time = 0;
-    this.timeIncreasingInterval = 10;
     this.data = [];
-
     this.accDueToGr = 9.80665;
     this.maxX = 0;
     this.maxY = 0;
@@ -25,12 +22,12 @@ class ChartModel {
     });
   }
 
-  increaseTime(speed, height, angle) {
-    this.time += this.timeIncreasingInterval / 1000;
-
+  increaseTime(speed, height, angle, time) {
+    const timeSec = time / 1000;
     const angleRad = angle * Math.PI / 180;
-    const newX = speed * Math.cos(angleRad) * this.time;
-    const newY = height + speed * Math.sin(angleRad) * this.time - this.accDueToGr * Math.pow(this.time, 2) / 2;
+
+    const newX = speed * Math.cos(angleRad) * timeSec;
+    const newY = height + speed * Math.sin(angleRad) * timeSec - this.accDueToGr * Math.pow(timeSec, 2) / 2;
 
     this.data.push({
       x: newX.toFixed(2),

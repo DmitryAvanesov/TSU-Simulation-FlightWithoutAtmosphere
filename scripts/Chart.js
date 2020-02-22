@@ -11,30 +11,23 @@ class Chart extends React.Component {
 
     this.chartWidth = 720;
     this.chartHeight = 480;
-    this.axisExtensionCoef = 1.05;
+    this.axisExtensionCoef = 1.1;
 
     this.model.setMaxAxis(this.props.speed, this.props.height, this.props.angle);
     this.model.setFirstPoint(props.height);
-
-    this.timeIncreasingFunction = setInterval(() => {
-      this.model.increaseTime(
-        this.props.speed,
-        this.props.height,
-        this.props.angle
-      );
-
-      this.setState({
-        data: this.model.data
-      });
-
-      if (this.model.data[this.model.data.length - 1].y <= 0) {
-        clearInterval(this.timeIncreasingFunction);
-      }
-    }, this.model.timeIncreasingInterval);
   }
 
   render() {
-    console.log(this.model.maxY);
+    this.model.increaseTime(
+      this.props.speed,
+      this.props.height,
+      this.props.angle,
+      this.props.time
+    );
+
+    if (this.model.data[this.model.data.length - 1].y <= 0) {
+      this.props.callbackFinish();
+    }
 
     return (
       <window.Recharts.LineChart
@@ -46,13 +39,12 @@ class Chart extends React.Component {
         <window.Recharts.XAxis
           dataKey='x'
           type='number'
-          domain={[0, this.model.maxX * this.axisExtensionCoef]}
+          domain={[0, Math.round(this.model.maxX * this.axisExtensionCoef)]}
         />
         <window.Recharts.YAxis
           dataKey='y'
           type='number'
-          domain={[0, this.model.maxY * this.axisExtensionCoef]}
-          width={150}
+          domain={[0, Math.round(this.model.maxY * this.axisExtensionCoef)]}
         />
         <window.Recharts.Line
           type='monotone'
