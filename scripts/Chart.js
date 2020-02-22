@@ -9,9 +9,9 @@ class Chart extends React.Component {
       data: this.model.data
     };
 
-    this.chartWidth = 900;
-    this.chartHeight = 600;
-    this.axisExtensionCoef = 1.1;
+    this.chartWidth = 720;
+    this.chartHeight = 480;
+    this.axisExtensionCoef = 1.05;
 
     this.model.setMaxAxis(this.props.speed, this.props.height, this.props.angle);
     this.model.setFirstPoint(props.height);
@@ -34,6 +34,8 @@ class Chart extends React.Component {
   }
 
   render() {
+    console.log(this.model.maxY);
+
     return (
       <window.Recharts.LineChart
         width={this.chartWidth}
@@ -50,6 +52,7 @@ class Chart extends React.Component {
           dataKey='y'
           type='number'
           domain={[0, this.model.maxY * this.axisExtensionCoef]}
+          width={150}
         />
         <window.Recharts.Line
           type='monotone'

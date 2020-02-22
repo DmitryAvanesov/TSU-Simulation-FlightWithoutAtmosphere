@@ -26,12 +26,15 @@ class ChartModel {
   }
 
   increaseTime(speed, height, angle) {
-    const angleRad = angle * Math.PI / 180;
     this.time += this.timeIncreasingInterval / 1000;
 
+    const angleRad = angle * Math.PI / 180;
+    const newX = speed * Math.cos(angleRad) * this.time;
+    const newY = height + speed * Math.sin(angleRad) * this.time - this.accDueToGr * Math.pow(this.time, 2) / 2;
+
     this.data.push({
-      x: speed * Math.cos(angleRad) * this.time,
-      y: height + speed * Math.sin(angleRad) * this.time - this.accDueToGr * Math.pow(this.time, 2) / 2
+      x: newX.toFixed(2),
+      y: newY.toFixed(2)
     });
   }
 }
