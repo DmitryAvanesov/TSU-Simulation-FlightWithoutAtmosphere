@@ -9,10 +9,6 @@ class Simulation extends React.Component {
       chart: this.createChart()
     };
 
-    this.timeIncreasingFunction = setInterval(() => {
-      this.model.increaseTime();
-    }, this.model.timeIncreasingInterval);
-
     this.handleParametersChange = this.handleParametersChange.bind(this);
   }
 
