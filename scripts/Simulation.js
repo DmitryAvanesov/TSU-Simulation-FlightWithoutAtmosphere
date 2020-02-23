@@ -6,23 +6,17 @@ class Simulation extends React.Component {
     this.model = new SimulationModel();
 
     this.parameters = this.renderParameters();
+    this.isRunning = false;
     this.symbolPlay = '>';
     this.symbolPause = '||';
 
     this.state = {
       chart: this.renderChart(),
       timer: this.renderTimer(),
-      button: this.renderButton(this.symbolPlay)
+      button: this.renderButton()
     };
 
-    this.timeIncreasingFunction = setInterval(() => {
-      this.model.time += this.model.timeIncreasingInterval;
-
-      this.setState({
-        chart: this.renderChart(),
-        timer: this.renderTimer()
-      });
-    }, this.model.timeIncreasingInterval);
+    this.timeIncreasingFunction = undefined;
   }
 
   render() {
@@ -32,6 +26,7 @@ class Simulation extends React.Component {
         <div class='info'>
           {this.parameters}
           {this.state.timer}
+          {this.state.button}
         </div>
       </div>
     );
@@ -68,10 +63,19 @@ class Simulation extends React.Component {
     );
   }
 
-  renderButton(curSymbol) {
+  renderButton() {
+    if (this.isRunning) {
+      return (
+        <Button
+          symbol={this.symbolPause}
+          callbackPress={this.handleButtonPress.bind(this)}
+        />
+      );
+    }
+
     return (
       <Button
-        symbol={curSymbol}
+        symbol={this.symbolPlay}
         callbackPress={this.handleButtonPress.bind(this)}
       />
     );
@@ -95,9 +99,27 @@ class Simulation extends React.Component {
 
   handleFinish() {
     clearInterval(this.timeIncreasingFunction);
+    this.model.time = 0;
+    this.isRunning = false;
+    this.setState({ button: this.renderButton() });
   }
 
   handleButtonPress() {
+    this.isRunning = !this.isRunning;
+    this.setState({ button: this.renderButton() });
 
+    if (this.isRunning) {
+      this.timeIncreasingFunction = setInterval(() => {
+        this.model.time += this.model.timeIncreasingInterval;
+  
+        this.setState({
+          chart: this.renderChart(),
+          timer: this.renderTimer()
+        });
+      }, this.model.timeIncreasingInterval);
+    }
+    else {
+
+    }
   }
 }

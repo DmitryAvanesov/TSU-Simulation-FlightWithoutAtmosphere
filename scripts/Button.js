@@ -7,7 +7,10 @@ class Button extends React.Component {
 
   render() {
     return (
-      <div class='button'>
+      <div
+        class='button'
+        onClick={this.props.callbackPress}
+      >
         {this.props.symbol}
       </div>
     );
