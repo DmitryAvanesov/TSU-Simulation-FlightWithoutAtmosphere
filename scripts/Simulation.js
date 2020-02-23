@@ -5,44 +5,35 @@ class Simulation extends React.Component {
     super(props);
     this.model = new SimulationModel();
 
-    this.state = {
-      chart: this.createChart()
-    };
+    this.parameters = this.renderParameters();
+    this.symbolPlay = '>';
+    this.symbolPause = '||';
 
-    this.handleParametersChange = this.handleParametersChange.bind(this);
+    this.state = {
+      chart: this.renderChart(),
+      timer: this.renderTimer(),
+      button: this.renderButton(this.symbolPlay)
+    };
 
     this.timeIncreasingFunction = setInterval(() => {
       this.model.time += this.model.timeIncreasingInterval;
-      this.setState({ chart: this.renderChart() })
-    }, this.model.timeIncreasingInterval);
 
-    this.handleFinish = this.handleFinish.bind(this);
+      this.setState({
+        chart: this.renderChart(),
+        timer: this.renderTimer()
+      });
+    }, this.model.timeIncreasingInterval);
   }
 
   render() {
     return (
       <div>
         {this.state.chart}
-
-        <Parameters
-          initialSpeed={this.model.initialSpeed}
-          initialHeight={this.model.initialHeight}
-          initialAngle={this.model.initialAngle}
-          callbackChange={this.handleParametersChange}
-        />
+        <div class='info'>
+          {this.parameters}
+          {this.state.timer}
+        </div>
       </div>
-    );
-  }
-
-  createChart() {
-    return (
-      <Chart
-        speed={this.model.initialSpeed}
-        height={this.model.initialHeight}
-        angle={this.model.initialAngle}
-        time={this.model.time}
-        callbackFinish={this.handleFinish}
-      />
     );
   }
 
@@ -53,7 +44,35 @@ class Simulation extends React.Component {
         height={this.model.height}
         angle={this.model.angle}
         time={this.model.time}
-        callbackFinish={this.handleFinish}
+        callbackFinish={this.handleFinish.bind(this)}
+      />
+    );
+  }
+
+  renderParameters() {
+    return (
+      <Parameters
+        initialSpeed={this.model.initialSpeed}
+        initialHeight={this.model.initialHeight}
+        initialAngle={this.model.initialAngle}
+        callbackChange={this.handleParametersChange.bind(this)}
+      />
+    );
+  }
+
+  renderTimer() {
+    return (
+      <Timer
+        time={this.model.time}
+      />
+    );
+  }
+
+  renderButton(curSymbol) {
+    return (
+      <Button
+        symbol={curSymbol}
+        callbackPress={this.handleButtonPress.bind(this)}
       />
     );
   }
@@ -76,5 +95,9 @@ class Simulation extends React.Component {
 
   handleFinish() {
     clearInterval(this.timeIncreasingFunction);
+  }
+
+  handleButtonPress() {
+
   }
 }

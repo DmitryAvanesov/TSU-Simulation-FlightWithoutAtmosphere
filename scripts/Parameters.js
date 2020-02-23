@@ -25,7 +25,7 @@ class Parameters extends React.Component {
             type='number'
             id='input-height'
             defaultValue={this.props.initialHeight}
-            onChange={this.props.callbackChange}
+            onChange={() => { this.props.callbackChange() }}
           >
           </input>
         </div>

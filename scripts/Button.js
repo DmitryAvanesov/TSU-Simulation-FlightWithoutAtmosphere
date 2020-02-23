@@ -1,14 +1,14 @@
 'use strict'
 
-class Timer extends React.Component {
+class Button extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
     return (
-      <div class='timer'>
-        {`${this.props.time / 1000} sec`}
+      <div class='button'>
+        {this.props.symbol}
       </div>
     );
   }

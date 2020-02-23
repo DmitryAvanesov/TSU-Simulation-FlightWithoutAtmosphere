@@ -1,27 +1,47 @@
+$button-size: 50px;
+
 .recharts-wrapper {
   display: inline-block;
 }
 
-.parameters {
+.info {
   display: inline-block;
   vertical-align: top;
-  margin-left: 50px;
 
-  .parameters-block {
-    margin: 10px 0;
-  
-    * {
-      display: inline-block;
+  .parameters {  
+    margin-left: 50px;
+
+    .parameters-block {
+      margin: 10px 0;
+    
+      * {
+        display: inline-block;
+      }
+    
+      .parameters-name {
+        font-weight: bold;
+      }
+    
+      input {
+        width: 100px;
+        margin-left: 10px;
+      }
     }
+  }
   
-    .parameters-name {
-      font-weight: bold;
-      font-size: 16px;
-    }
-  
-    input {
-      width: 100px;
-      margin-left: 10px;
-    }
+  .timer {
+    margin-top: 20px;
+    margin-left: 50px;
+  }
+
+  .button {
+    margin-top: 20px;
+    margin-left: 50px;
+    background-color: black;
+    color: white;
+    width: $button-size;
+    height: $button-size;
+    text-align: center;
+    line-height: $button-size;
   }
 }
