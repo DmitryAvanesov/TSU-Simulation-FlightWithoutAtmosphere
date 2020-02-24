@@ -11,15 +11,8 @@ class ChartModel {
   setMaxAxis(speed, height, angle) {
     const angleRad = angle * Math.PI / 180;
 
-    this.maxX = speed * Math.cos(angleRad) * (speed * Math.sin(angleRad) + Math.sqrt(Math.pow(speed, 2) * Math.pow(Math.sin(angleRad) + 2 * this.accDueToGr * height, 2))) / this.accDueToGr;
+    this.maxX = speed * Math.cos(angleRad) * (speed * Math.sin(angleRad) + Math.sqrt(Math.pow(speed, 2) * Math.pow(Math.sin(angleRad), 2) + 2 * this.accDueToGr * height)) / this.accDueToGr;
     this.maxY = height + Math.pow(speed, 2) * Math.pow(Math.sin(angleRad), 2) / (2 * this.accDueToGr);
-  }
-
-  setFirstPoint(height) {
-    this.data.push({
-      x: 0,
-      y: height
-    });
   }
 
   increaseTime(speed, height, angle, time) {
