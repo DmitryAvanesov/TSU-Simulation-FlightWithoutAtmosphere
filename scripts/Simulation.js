@@ -83,13 +83,13 @@ class Simulation extends React.Component {
 
   handleParametersChange() {
     if (event.target.id === 'input-speed') {
-      this.model.speed = event.target.value;
+      this.model.speed = parseInt(event.target.value);
     }
     else if (event.target.id === 'input-height') {
-      this.model.height = event.target.value;
+      this.model.height = parseInt(event.target.value);
     }
     else {
-      this.model.angle = event.target.value;
+      this.model.angle = parseInt(event.target.value);
     }
 
     this.setState({
@@ -101,12 +101,17 @@ class Simulation extends React.Component {
     clearInterval(this.timeIncreasingFunction);
     this.model.time = 0;
     this.isRunning = false;
+
     this.setState({ button: this.renderButton() });
   }
 
   handleButtonPress() {
     this.isRunning = !this.isRunning;
-    this.setState({ button: this.renderButton() });
+
+    this.setState({ 
+      chart: this.renderChart(),
+      button: this.renderButton()
+    });
 
     if (this.isRunning) {
       this.timeIncreasingFunction = setInterval(() => {
@@ -119,7 +124,8 @@ class Simulation extends React.Component {
       }, this.model.timeIncreasingInterval);
     }
     else {
-
+      clearInterval(this.timeIncreasingFunction);
+      this.setState({ button: this.renderButton() });
     }
   }
 }

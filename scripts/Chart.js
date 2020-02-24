@@ -12,16 +12,14 @@ class Chart extends React.Component {
     this.chartWidth = 720;
     this.chartHeight = 480;
     this.axisExtensionCoef = 1.1;
-
-    this.model.setMaxAxis(this.props.speed, this.props.height, this.props.angle);
-    this.model.setFirstPoint(props.height);
   }
 
   render() {
-    console.log(this.props.time);
     if (this.props.time == 0) {
-      this.model.data = [];
+      this.model.data.length = 0;
     }
+
+    this.model.setMaxAxis(this.props.speed, this.props.height, this.props.angle);
 
     this.model.increaseTime(
       this.props.speed,
